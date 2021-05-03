@@ -330,7 +330,7 @@ while not done:
     stats_show.upd()
     stats_show.draw()
 
-    save_buttons.draw()
+    save_buttons.draw() # It is empty by default, but is drawing all the time
 
     draw_success_label(frame_counter)
 
