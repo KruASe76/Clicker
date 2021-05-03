@@ -29,6 +29,7 @@ consts = {
 # Paths
 IMG_PATH = os.path.join(os.getcwd(), 'images')
 DOC_PATH = os.path.join(os.getcwd(), 'docs')
+FONT_PATH = os.path.join(os.getcwd(), 'fonts')
 
 # Other
 success_label_hiding_frame = -1
@@ -252,16 +253,16 @@ def init_success_label():
 
 # INITIALIZING OBJECTS
 
-name_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 30)
-owncost_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 22)
-buff_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 20)
-owncost_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 22)
-balance_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 45)
-bp_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 35)
-other_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 25)
-save_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 20)
-success_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 40)
-ws_font = pygame.font.Font(os.path.join(os.getcwd(), 'fonts', 'jbm-r.ttf'), 60)
+name_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 30)
+owncost_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 22)
+buff_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 20)
+owncost_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 22)
+balance_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 45)
+bp_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 35)
+other_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 25)
+save_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 20)
+success_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 40)
+ws_font = pygame.font.Font(os.path.join(FONT_PATH, 'jbm-r.ttf'), 60)
 
 main_button = Main_Button()
 up_list = []
@@ -346,5 +347,4 @@ while not done:
     if frame_counter == FPS*1000:
         frame_counter = 0
         success_label_hiding_frame -= FPS*1000
-
 pygame.quit()
