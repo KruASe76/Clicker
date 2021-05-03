@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import random, os, pyperclip
 import pygame
 pygame.init()
-
-import random, os, pyperclip
-from openpyxl.utils.cell import get_column_letter as letter, column_index_from_string as num
 
 # CREATING DERICTORIES
 os.makedirs(os.path.join(os.getcwd(), 'docs'), exist_ok=True)
@@ -159,7 +157,6 @@ class Save_buttons():
         self.export_file_rect = pygame.Rect(self.x1, self.y2, self.width, self.height)
         self.import_clip_rect = pygame.Rect(self.x2, self.y1, self.width, self.height)
         self.import_file_rect = pygame.Rect(self.x2, self.y2, self.width, self.height)
-
         self.texts = {
             'export_clip': ['   Export to', '   clipboard'],
             'export_file': ['   Export to', '      file'],
@@ -176,7 +173,7 @@ class Save_buttons():
             unciphered_list.extend([up.cost for up in up_list])
             unciphered_list.extend([up.owned for up in up_list])
             
-            ciphered_list = [letter(num+1) for num in unciphered_list]
+            ciphered_list = [cipher(num+1) for num in unciphered_list]
             ciphered_str = invisible.join(ciphered_list)
 
             if is_file:
@@ -191,19 +188,22 @@ class Save_buttons():
             
     def import_save(self, is_file):
         if self.click_flag:
-            if is_file:
-                with open(os.path.join(DOC_PATH, 'clicker_progress.txt'), 'r', encoding='utf-8') as file:
-                    ciphered_str = file.read()
-            else:
-                ciphered_str = pyperclip.paste()
-            ciphered_list = ciphered_str.split(invisible)
-            unciphered_list = [num(word)-1 for word in ciphered_list]
+            try:
+                if is_file:
+                    with open(os.path.join(DOC_PATH, 'clicker_progress.txt'), 'r', encoding='utf-8') as file:
+                        ciphered_str = file.read()
+                else:
+                    ciphered_str = pyperclip.paste()
+                ciphered_list = ciphered_str.split(invisible)
+                unciphered_list = [decipher(word)-1 for word in ciphered_list]
 
-            stats.update([(list(stats.keys())[i], unciphered_list[i]) for i in range(5)])
-            for i in range(5, 9):
-                up_list[i-5].cost = unciphered_list[i]
-            for i in range(9, 13):
-                up_list[i-9].owned = unciphered_list[i]
+                stats.update([(list(stats.keys())[i], unciphered_list[i]) for i in range(5)])
+                for i in range(5, 9):
+                    up_list[i-5].cost = unciphered_list[i]
+                for i in range(9, 13):
+                    up_list[i-9].owned = unciphered_list[i]
+            except:
+                return
 
             init_success_label()
 
@@ -234,11 +234,11 @@ def second_increase():
     stats['balance'] += stats['bps']
     stats['all_time'] += stats['bps']
 
-def ciper(data):
-    pass
+def cipher(data):
+    return hex(data)[2:]
 
 def decipher(data):
-    pass
+    return int(data, 16)
 
 def draw_success_label(frame_count):
     global success_label_hiding_frame
