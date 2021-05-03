@@ -173,7 +173,7 @@ class Save_buttons():
             unciphered_list.extend([up.cost for up in up_list])
             unciphered_list.extend([up.owned for up in up_list])
             
-            ciphered_list = [cipher(num+1) for num in unciphered_list]
+            ciphered_list = [cipher(num) for num in unciphered_list]
             ciphered_str = invisible.join(ciphered_list)
 
             if is_file:
@@ -195,7 +195,7 @@ class Save_buttons():
                 else:
                     ciphered_str = pyperclip.paste()
                 ciphered_list = ciphered_str.split(invisible)
-                unciphered_list = [decipher(word)-1 for word in ciphered_list]
+                unciphered_list = [decipher(word) for word in ciphered_list]
 
                 stats.update([(list(stats.keys())[i], unciphered_list[i]) for i in range(5)])
                 for i in range(5, 9):
